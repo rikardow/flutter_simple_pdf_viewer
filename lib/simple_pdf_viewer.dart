@@ -5,15 +5,15 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-typedef LoadCompleteCallback = void Function(bool res);
+typedef LoadCompleteCallback = void Function(bool? res);
 
 class SimplePdfViewerWidget extends StatelessWidget {
   /// The initial URL to load.
-  final String initialUrl;
-  final LoadCompleteCallback completeCallback;
+  final String? initialUrl;
+  final LoadCompleteCallback? completeCallback;
 
   const SimplePdfViewerWidget({
-    Key key,
+    Key? key,
     this.initialUrl,
     this.completeCallback
   }) :super(key: key);
@@ -37,11 +37,11 @@ class SimplePdfViewerWidget extends StatelessWidget {
 
 class _AndroidPdfWidget extends StatefulWidget{
   /// The initial URL to load.
-  final String initialUrl;
-  final LoadCompleteCallback completeCallback;
+  final String? initialUrl;
+  final LoadCompleteCallback? completeCallback;
 
   const _AndroidPdfWidget({
-    Key key,
+    Key? key,
     this.initialUrl,
     this.completeCallback
   }) :super(key: key);
@@ -69,7 +69,7 @@ class _AndroidPdfWidgetState extends State<_AndroidPdfWidget>{
   Future<bool> _onMethodCall(MethodCall call) async {
     switch (call.method) {
       case 'loadComplete':
-        final bool res = call.arguments['result'];
+        final bool? res = call.arguments['result'];
         this.widget.completeCallback?.call(res);
         return true;
     }
@@ -87,7 +87,7 @@ class _CreationParams {
     );
   }
 
-  final String initialUrl;
+  final String? initialUrl;
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
